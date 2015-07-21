@@ -8,19 +8,14 @@ begin
   require 'yaml'
   require 'fileutils'
   require 'net/http'
-  require_relative './ssl-check/server'
-  
-  # DONT DO THIS
-  # Require all my libs
-  #library_files = Dir[File.join(File.dirname(__FILE__), "*.rb")].sort
-  #library_files.each do |f|
-  #  require f
-  #end
+  require_relative './server'
+  require_relative './options' 
 
 rescue Exception => e
   
   puts "Failure during requires..."
   puts e.message
+  puts e.backtrace
 
 end
 
