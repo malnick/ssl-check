@@ -10,6 +10,7 @@ begin
   require 'net/http'
   require_relative './server'
   require_relative './options' 
+  require_relative './ciphers'
 
 rescue Exception => e
   

@@ -16,6 +16,8 @@ urls:
     url: app.srcclr.com
     port: 443
 
+# Check Type
+# TODO
 # Basic application config
 ssl_check_config:
   port: 8000

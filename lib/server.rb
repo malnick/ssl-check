@@ -7,7 +7,7 @@ ENV['RACK_ENV'] = 'production'
 module SSLCheck
   class TheServer < Sinatra::Base
     get '/' do
-      "TEST"
+      SSLCheck::Ciphers.verify
     end
   end
 
