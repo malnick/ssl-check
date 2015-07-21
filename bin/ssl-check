@@ -5,7 +5,7 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 case "$1" in
   start)
     echo "Starting server on localhost:8000"
-    ruby $DIR/ssl-check.rb
+    ruby $DIR/start-ssl-check.rb
     ;;
   stop)
     echo "Stopping server"

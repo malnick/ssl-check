@@ -23,5 +23,5 @@ ssl_check_config:
 
 # Webhook config for various on_failure endpoints:
 on_failure:
-  pager_duty:
-  slack:
+  pager_duty: false
+  slack: false
