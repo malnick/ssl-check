@@ -6,17 +6,16 @@ begin
   require 'logger'
   require 'json'
   require 'yaml'
-  require 'optparse'
-  require 'git'
   require 'fileutils'
   require 'net/http'
-  require 'csv'
-
+  require_relative './ssl-check/server'
+  
+  # DONT DO THIS
   # Require all my libs
-  library_files = Dir[File.join(File.dirname(__FILE__), "*.rb")].sort
-  library_files.each do |f|
-    require f
-  end
+  #library_files = Dir[File.join(File.dirname(__FILE__), "*.rb")].sort
+  #library_files.each do |f|
+  #  require f
+  #end
 
 rescue Exception => e
   
@@ -26,10 +25,18 @@ rescue Exception => e
 end
 
 begin 
-  LOG = Logger.new(STDOUT) #Logger.new(File.expand_path(File.dirname(__FILE__)) + '/../logs/versionctl.log')
-  LOG.info "Starting Versionctl..."
-  config_path = ENV['VERSIONCTL_CONFIG_PATH'] ||  File.expand_path(File.dirname(__FILE__)) + '/../ext/versionctl.yaml' 
-  CONFIG = Versionctl::Options.initialize(config_path)
+  # Set logging for STDOUT so this works fine in Docker
+  LOG = Logger.new(STDOUT)
+  LOG.info "##### Starting SSL Check #####"
+  
+  # Generate our baseline configuration and export static vars
+  config_path = ENV['SSL_CHECK_CONFIG_PATH'] ||  File.expand_path(File.dirname(__FILE__)) + '/../ext/ssl-check.yaml' 
+  CONFIG      = SSLCheck::Options.initialize(config_path)
+  PORT        = CONFIG[:ssl_check_port]
+  SSL_ENABLE  = CONFIG[:ssl_check_use_ssl]
+
+  SSLCheck::Server.run
+
 rescue Exception => e
   puts e.backtrace
   puts e.message
