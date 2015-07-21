@@ -1,20 +1,21 @@
 require 'nmap/xml'
 
 # remove later
-require 'logger'
-LOG = Logger.new(STDOUT)
+#require 'logger'
+#LOG = Logger.new(STDOUT)
 
 module SSLCheck
   class Ciphers
    
     def self.verify
-      urls         = {
-                        'corporate' => {
-                          'url' => 'srcclr.com',
-                          'port'=>'443'
-                        }
-                      }
-      get_ciphers(urls)
+      #urls         = {
+      #                  'corporate' => {
+      #                    'url' => 'srcclr.com',
+      #                    'port'=>'443'
+      #                  }
+      #                }
+      
+      get_ciphers(CONFIG[:urls])
       read_ciphers
     
     end
@@ -60,4 +61,4 @@ module SSLCheck
   end
 end
     
-SSLCheck::Ciphers.verify
+#SSLCheck::Ciphers.verify
