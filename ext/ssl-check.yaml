@@ -1,0 +1,27 @@
+---
+# Main URLs for SSL Check to query
+# Requires following keys:
+# urls:
+#   $some_name:
+#     url:
+#     port:
+urls:
+  corporate: 
+    url: srcclr.com
+    port: 443
+  blog: 
+    url: blog.srcclr.com
+    port: 443
+  app: 
+    url: app.srcclr.com
+    port: 443
+
+# Basic application config
+ssl_check_config:
+  port: 8000
+  ssl: false
+
+# Webhook config for various on_failure endpoints:
+on_failure:
+  pager_duty:
+  slack:
