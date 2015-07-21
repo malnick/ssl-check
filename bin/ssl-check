@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+case "$1" in
+  start)
+    echo "Starting server on localhost:8000"
+    ruby $DIR/ssl-check.rb
+    ;;
+  stop)
+    echo "Stopping server"
+    kill -9 $(lsof -i :8000 | awk 'NR==2 {print $2}')
+    ;;
+  restart|reload)
+    echo "Restarting server"
+    $0 stop
+    sleep 2
+    $0 start
+    ;;
+  *)
+    echo "Usage: start|stop|restart|reload"
+    exit 1
+    ;;
+esac
+exit 0
